@@ -8,6 +8,8 @@ const typeDefs = gql`
     friends: [User]!
   }
 
+  union Footwear = Sneaker | Boot
+
   enum ShoeType { 
     JORDAN
     NIKE
