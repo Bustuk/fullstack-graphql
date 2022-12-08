@@ -8,8 +8,14 @@ const typeDefs = gql`
     friends: [User]!
   }
 
+  enum ShoeType { 
+    JORDAN
+    NIKE
+    ADIDAS
+  } 
+
   type Shoe {
-    brand: String!
+    brand: ShoeType!
     size: Int!
   }
 
