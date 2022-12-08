@@ -5,23 +5,27 @@
 
 module.exports = {
   Query: {
-    pets(a, b, ctx) {
-      console.log(ctx)
-      return ctx.models.Pet.findMany()
+    pets(_, { input }, ctx) {
+      return ctx.models.Pet.findMany(input)
     },
+    pet(_, { input }, ctx) {
+      return ctx.models.Pet.findOne(input)
+    }
   },
   // Mutation: {
     
   // },
-  // Pet: {
-  //   img(pet) {
-  //     return pet.type === 'DOG'
-  //       ? 'https://placedog.net/300/300'
-  //       : 'http://placekitten.com/300/300'
-  //   },
-  //   pet: (_, {input}, {x}) => models.Pet.findOne(input),
-  // },
+  Pet: {
+    // id() {
+    //   return 1
+    // },
+    // img(pet) {
+    //   return pet.type === 'DOG'
+    //     ? 'https://placedog.net/300/300'
+    //     : 'http://placekitten.com/300/300'
+    // },
+  },
   // User: {
-  //   user: (_, __, {x}) => models.User.findOne()
+  //   username: (_, __, {models}) => models.User.findOne()['username']
   // }
 }
