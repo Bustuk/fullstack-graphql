@@ -12,9 +12,11 @@ module.exports = {
       return ctx.models.Pet.findOne(input)
     }
   },
-  // Mutation: {
-    
-  // },
+  Mutation: {
+    createPet(_, { input }, ctx) {
+      return ctx.models.Pet.create(input)
+    }
+  },
   Pet: {
     // id() {
     //   return 1

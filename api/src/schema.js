@@ -26,6 +26,16 @@ const typeDefs = gql`
     pets(input: PetInput): [Pet]!
     pet(input: PetInput): Pet
   }
+
+  input createPetInput {
+    name: String!
+    type: String!
+  }
+
+  type Mutation {
+    createPet(input: createPetInput!): Pet!
+  }
+
 `;
 
 module.exports = typeDefs
