@@ -6,9 +6,8 @@ const typeDefs = gql`
     email: String!
     avatar: String
     friends: [User]!
+    shoes: [Shoe]!
   }
-
-  union Footwear = Sneaker | Boot
 
   enum ShoeType { 
     JORDAN
@@ -19,18 +18,21 @@ const typeDefs = gql`
   interface Shoe {
     brand: ShoeType!
     size: Int!
+    user: User!
   }
 
   type Sneaker implements Shoe {
     brand: ShoeType!
     size: Int!
     sport: String
+    user: User!
   }
 
   type Boot implements Shoe {
     brand: ShoeType!
     size: Int!
     hasGrip: Boolean
+    user: User!
   }
 
   input ShoesInput {
@@ -52,21 +54,26 @@ const typeDefs = gql`
     newShoe(input: NewShoeInput!): Shoe!
   }
 `
+const user = {
+  id: 1,
+  email: 'yoda@masters.com',
+  avatar: 'http://yoda.png',
+  friends: [],
+  shoes: [],
+}
+
+const shoes = [
+  {brand: 'NIKE', size: 12, sport: 'basketball', user: 1},
+  {brand: 'ADIDAS', size: 13, hasGrip: true, user: 1},
+]
 
 const resolvers = {
   Query: {
     me() {
-      return {
-        email: 'yoda@masters.com',
-        avatar: 'http://yoda.png',
-        friends: []
-      }
+      return user
     },
     shoes(_, {input}) {
-      return [
-        {brand: 'NIKE', size: 12, sport: 'basketball'},
-        {brand: 'ADIDAS', size: 13, hasGrip: true},
-      ]
+      return shoes
     }
   },
   Mutation: {
@@ -75,14 +82,29 @@ const resolvers = {
       return input
     }
   },
+  User: {
+    shoes(user) {
+      return shoes
+    }
+  },
   Shoe: {
     __resolveType(shoe) {
       if (shoe.sport) {
         return 'Sneaker'
       }
       return 'Boot'
+    },
+  },
+  Sneaker: {
+    user(shoe) {
+      return user;
     }
-  }
+  },
+  Boot: {
+    user(shoe) {
+      return user;
+    }
+  },
 }
 
 const server = new ApolloServer({

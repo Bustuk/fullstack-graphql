@@ -8,13 +8,15 @@
       "id": "jBWMVGjm50l6LGwepDoty",
       "name": "Rex",
       "type": "dog",
-      "createdAt": "2019-01-01T00:00:00.000Z"
+      "createdAt": "2019-01-01T00:00:00.000Z",
+      "userId": "jBWMVGjm50l6LGwepDoty"
     },
     {
       "id": "fEmpuOwPIm3TQUVN-eDpu",
       "createdAt": 1670498257569,
       "name": "impek",
-      "type": "Dog"
+      "type": "Dog",
+      "userId": "jBWMVGjm50l6LGwepDoty"
     }
   ]
 }
